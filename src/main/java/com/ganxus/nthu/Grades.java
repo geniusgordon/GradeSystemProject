@@ -22,15 +22,28 @@ public class Grades {
    * @param grades The student's grade.
    */
   public Grades(String name, String id, int[] grades) {
+    this.name = name;
+    this.id = id;
+    this.grades = grades;
   }
 
   /**
    * This method calculates total grade
+   * Time estimate: O(n)
+   *
    * @param weights Weights for different grades.
    * @return Total grade for this student.
+   *
    */
   public int calculateTotalGrade(float[] weights) {
-    return 0;
+    float total = 0f;
+    // for each grade in grades
+    for (int i = 0; i < grades.length; i++) {
+      // multiple with corresponding weight
+      // add them together
+      total += grades[i] * weights[i];
+    }
+    return (int)Math.floor(total + 0.5f);
   }
 }
 
