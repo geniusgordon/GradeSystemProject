@@ -53,6 +53,10 @@ public class GradeSystems {
     students = readGrades("gradeInput.txt");
   }
 
+  public GradeSystems(String filename) throws IOException {
+    students = readGrades(filename);
+  }
+
   /**
    * This method gets the student's grade by his id
    * Time estimate: O(n)

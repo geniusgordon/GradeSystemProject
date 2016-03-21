@@ -6,6 +6,7 @@ import com.ganxus.nthu.Grades;
 import com.ganxus.nthu.GradeSystems;
 
 public class TestGradeSystems {
+  static String testInput = "src/test/java/com/ganxus/nthu/testInput.txt";
 
   @Test
   public void testParseLine() {
@@ -25,9 +26,18 @@ public class TestGradeSystems {
     List<Grades> expectedGrade = new LinkedList<Grades>();
     expectedGrade.add(student1);
     expectedGrade.add(student2);
-    List<Grades> testGrade = GradeSystems.readGrades("src/test/java/com/ganxus/nthu/testInput.txt");
+    List<Grades> testGrade = GradeSystems.readGrades(testInput);
     assertEquals(expectedGrade.get(0), testGrade.get(0));
     assertEquals(expectedGrade.get(1), testGrade.get(1));
+  }
+
+  @Test
+  public void testGetGradeById() throws IOException {
+    GradeSystems system = new GradeSystems(testInput);
+    int grades[] = { 100, 100, 100, 100, 100 };
+    Grades expectedGrade = new Grades("Gordon", "102062312", grades);
+    Grades testGrade = system.getGradeById("102062312");
+    assertEquals(expectedGrade, testGrade);
   }
 }
 
