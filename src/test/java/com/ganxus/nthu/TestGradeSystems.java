@@ -15,5 +15,18 @@ public class TestGradeSystems {
     assertEquals(expectedGrade, testGrade);
   }
 
+  @Test
+  public void testReadGrades() {
+    int grades1[] = { 100, 100, 100, 100, 100 };
+    int grades2[] = { 0, 0, 0, 0, 0 };
+    Grades student1 = new Grades("Gordon", "102062312", grades1);
+    Grades student2 = new Grades("Frank", "102062115", grades2);
+    List<Grades> expectedGrade = new LinkedList<Grades>();
+    expectedGrade.add(student1);
+    expectedGrade.add(student2);
+    List<Grades> testGrade = GradeSystems.readGrades("testInput.txt");
+    assertEquals(expectedGrade.get(0), testGrade.get(0));
+    assertEquals(expectedGrade.get(1), testGrade.get(1));
+  }
 }
 
