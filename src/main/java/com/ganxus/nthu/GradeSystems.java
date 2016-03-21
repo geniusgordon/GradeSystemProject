@@ -1,5 +1,8 @@
 package com.ganxus.nthu;
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  * A class for a list of student grades
@@ -8,8 +11,20 @@ public class GradeSystems {
   private float[] weights = { 0.1f, 0.1f, 0.1f, 0.3f, 0.4f };
   private List<Grades> students;
 
-  static public List<Grades> readGrades(String filename) {
-    return new LinkedList<Grades>();
+  /**
+   * This function reads data from a file and parse it into a List object.
+   *
+   * @param filename the filename of the data.
+   * @return a List of Grades.
+   */
+  static public List<Grades> readGrades(String filename) throws IOException {
+    List<Grades> grades = new LinkedList<Grades>();
+		BufferedReader br = new BufferedReader(new FileReader(filename));
+		String line = null;
+		while((line = br.readLine()) != null) {
+      grades.add(parseLine(line));
+		}
+    return grades;
   }
 
   /**
@@ -34,7 +49,7 @@ public class GradeSystems {
    * Class constructor
    *
    */
-  public GradeSystems() {
+  public GradeSystems() throws IOException {
     students = readGrades("gradeInput.txt");
   }
 
