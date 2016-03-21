@@ -40,5 +40,12 @@ public class TestGradeSystems {
     assertNotNull(testGrade);
     assertEquals(expectedGrade, testGrade);
   }
+
+  @Test
+  public void testGetRank() throws IOException {
+    GradeSystems system = new GradeSystems(testInput);
+    int rank = system.getRank("102062312");
+    assertEquals(1, rank);
+  }
 }
 
