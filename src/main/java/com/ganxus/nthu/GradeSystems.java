@@ -62,10 +62,14 @@ public class GradeSystems {
    * Time estimate: O(n)
    *
    * @param id Student's id.
-   * @return Student's grade.
+   * @return Student's grade, return null if not found.
    *
    */
   public Grades getGradeById(String id) {
+    for (Grades g: students) {
+      if (g.getId().equals(id))
+        return g;
+    }
     return null;
   }
 

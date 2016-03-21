@@ -37,6 +37,7 @@ public class TestGradeSystems {
     int grades[] = { 100, 100, 100, 100, 100 };
     Grades expectedGrade = new Grades("Gordon", "102062312", grades);
     Grades testGrade = system.getGradeById("102062312");
+    assertNotNull(testGrade);
     assertEquals(expectedGrade, testGrade);
   }
 }

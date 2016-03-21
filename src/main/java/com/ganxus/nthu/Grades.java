@@ -27,6 +27,10 @@ public class Grades {
     this.grades = grades;
   }
 
+  public String getId() {
+    return id;
+  }
+
   /**
    * This method calculates total grade
    * Time estimate: O(n)
