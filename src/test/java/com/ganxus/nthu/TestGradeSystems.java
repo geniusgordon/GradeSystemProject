@@ -44,8 +44,8 @@ public class TestGradeSystems {
   @Test
   public void testGetRank() throws IOException {
     GradeSystems system = new GradeSystems(testInput);
-    int rank = system.getRank("102062312");
-    assertEquals(1, rank);
+    int rank = system.getRank("102062115");
+    assertEquals(2, rank);
   }
 }
 

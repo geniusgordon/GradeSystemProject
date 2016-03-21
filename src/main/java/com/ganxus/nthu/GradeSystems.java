@@ -77,10 +77,22 @@ public class GradeSystems {
    * This method returns the student's rank.
    *
    * @param id Student's id.
-   * @return Student's rank.
+   * @return Student's rank, return -1 if not found.
    */
   public int getRank(String id) {
-    return 0;
+    Grades s = getGradeById(id);
+    if (s == null)
+      return -1;
+    int rank = 1;
+    for(Grades g: students) {
+      if (g.getId().equals(id))
+        continue;
+      int gGrade = g.calculateTotalGrade(weights);
+      int sGrade = s.calculateTotalGrade(weights);
+      if (gGrade > sGrade)
+        rank++;
+    }
+    return rank;
   }
 
   /**
