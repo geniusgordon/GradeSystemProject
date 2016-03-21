@@ -52,5 +52,31 @@ public class TestUI {
     System.setIn(in);
     String command = ui.promptCommand();
   }
+
+  @Test
+  public void TestShowGrades() throws IOException {
+    String expectedOutput = "Gordon成績:\n" +
+                            "lab1: 100\n" +
+                            "lab2: 100\n" +
+                            "lab3: 100\n" +
+                            "mid-term: 100\n" +
+                            "final exam: 100\n" +
+                            "total grade: 100\n";
+    ui.showGrades("102062312");
+    assertEquals(expectedOutput, out.toString());
+  }
+
+  @Test
+  public void TestShowFailedGrades() throws IOException {
+    String expectedOutput = "Frank成績:\n" +
+                            "lab1: 0*\n" +
+                            "lab2: 0*\n" +
+                            "lab3: 0*\n" +
+                            "mid-term: 0*\n" +
+                            "final exam: 0*\n" +
+                            "total grade: 0*\n";
+    ui.showGrades("102062115");
+    assertEquals(expectedOutput, out.toString());
+  }
 }
 

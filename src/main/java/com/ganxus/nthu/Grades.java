@@ -27,8 +27,16 @@ public class Grades {
     this.grades = grades;
   }
 
+  public String getName() {
+    return name;
+  }
+
   public String getId() {
     return id;
+  }
+
+  public int[] getGrades() {
+    return grades;
   }
 
   /**

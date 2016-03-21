@@ -7,6 +7,7 @@ import java.util.*;
  */
 public class UI {
   private List<String> commands;
+  private String id;
   private GradeSystems system;
 
   /**
@@ -56,10 +57,23 @@ public class UI {
   public void showEndMessage() {
   }
 
-  public void showGrade() {
+  public String getGradeString(int grade) {
+    return grade >= 60 ? String.valueOf(grade) : String.valueOf(grade) + "*";
   }
 
-  public void showRank() {
+  public void showGrades(String id) {
+    Grades s = system.getGradeById(id);
+    int[] grades = s.getGrades();
+    System.out.println(s.getName() + "成績:");
+    System.out.println("lab1: " + getGradeString(grades[Grades.LAB1]));
+    System.out.println("lab2: " + getGradeString(grades[Grades.LAB2]));
+    System.out.println("lab3: " + getGradeString(grades[Grades.LAB3]));
+    System.out.println("mid-term: " + getGradeString(grades[Grades.MID]));
+    System.out.println("final exam: " + getGradeString(grades[Grades.FINAL]));
+    System.out.println("total grade: " + getGradeString(s.calculateTotalGrade(system.getWeights())));
+  }
+
+  public void showRank(String id) {
   }
 
   public void updateWeights() {
