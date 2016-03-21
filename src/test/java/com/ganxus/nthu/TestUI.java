@@ -8,12 +8,14 @@ import com.ganxus.nthu.GradeSystems;
 
 public class TestUI {
   static String testInput = "src/test/java/com/ganxus/nthu/testInput.txt";
-  ByteArrayOutputStream outContent;
+  UI ui;
+  ByteArrayOutputStream out;
 
   @Before
   public void redirectSystemOut() throws IOException {
-    outContent = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outContent));
+    ui = new UI(testInput);
+    out = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(out));
   }
 
   @After
@@ -24,7 +26,6 @@ public class TestUI {
 
   @Test
   public void TestPromptId() throws IOException {
-    UI ui = new UI(testInput);
     ByteArrayInputStream in = new ByteArrayInputStream("102062312\n".getBytes());
     System.setIn(in);
     String id = ui.promptId();
@@ -33,9 +34,23 @@ public class TestUI {
 
   @Test
   public void TestWelcomeMessage() throws IOException {
-    UI ui = new UI(testInput);
     ui.showWelcomeMessage("102062312");
-    assertEquals("Welcome 102062312\n", outContent.toString());
+    assertEquals("Welcome 102062312\n", out.toString());
+  }
+
+  @Test
+  public void TestPromptCommand() throws IOException, UI.NoCommandException {
+    ByteArrayInputStream in = new ByteArrayInputStream("G\n".getBytes());
+    System.setIn(in);
+    String command = ui.promptCommand();
+    assertEquals("G", command);
+  }
+
+  @Test(expected=UI.NoCommandException.class)
+  public void TestPromptCommandException() throws IOException, UI.NoCommandException {
+    ByteArrayInputStream in = new ByteArrayInputStream("Z\n".getBytes());
+    System.setIn(in);
+    String command = ui.promptCommand();
   }
 }
 
