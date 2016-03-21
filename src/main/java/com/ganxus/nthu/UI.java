@@ -29,6 +29,51 @@ public class UI {
   }
 
   public void run() {
+    Scanner sc = new Scanner(System.in);
+    while(true) {
+      String i = promptId();
+      if (system.getGradeById(i) != null) {
+        id = i;
+        break;
+      }
+      if (i.equals("Q")) {
+        showEndMessage();
+        return;
+      }
+      System.out.println("沒有這個人");
+    }
+    showWelcomeMessage(id);
+    while(true) {
+      try {
+        String command = promptCommand();
+        if (command.equals("G")) {
+          showGrades(id);
+        } else if (command.equals("R")) {
+          showRank(id);
+        } else if (command.equals("W")) {
+          System.out.println("舊配分");
+          showWeights(system.getWeights());
+          float[] newWeights = updateWeights();
+          System.out.println("請確認新配分");
+          showWeights(newWeights);
+          String confirm = sc.next();
+          if (confirm.equals("Y")) {
+            try {
+              system.updateWeights(newWeights);
+            } catch(IllegalArgumentException e) {
+              System.out.println("配分沒打好");
+            }
+          } else {
+            System.out.println("配分未更新");
+          }
+        } else if (command.equals("E")) {
+          showEndMessage();
+          return;
+        } 
+      } catch(NoCommandException e) {
+        System.out.println("沒有這個指令");
+      }
+    }
   }
 
   public String promptId() {
@@ -51,7 +96,8 @@ public class UI {
   }
 
   public void showWelcomeMessage(String id) {
-    System.out.println("Welcome " + id);
+    Grades s = system.getGradeById(id);
+    System.out.println("Welcome " + s.getName());
   }
 
   public void showEndMessage() {

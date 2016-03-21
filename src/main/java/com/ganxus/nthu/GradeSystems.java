@@ -50,7 +50,7 @@ public class GradeSystems {
    *
    */
   public GradeSystems() throws IOException {
-    students = readGrades("gradeInput.txt");
+    students = readGrades("com/ganxus/nthu/gradeInput.txt");
   }
 
   public GradeSystems(String filename) throws IOException {

@@ -35,7 +35,7 @@ public class TestUI {
   @Test
   public void TestWelcomeMessage() {
     ui.showWelcomeMessage("102062312");
-    assertEquals("Welcome 102062312\n", out.toString());
+    assertEquals("Welcome Gordon\n", out.toString());
   }
 
   @Test
