@@ -33,13 +33,13 @@ public class TestUI {
   }
 
   @Test
-  public void TestWelcomeMessage() throws IOException {
+  public void TestWelcomeMessage() {
     ui.showWelcomeMessage("102062312");
     assertEquals("Welcome 102062312\n", out.toString());
   }
 
   @Test
-  public void TestPromptCommand() throws IOException, UI.NoCommandException {
+  public void TestPromptCommand() throws UI.NoCommandException {
     ByteArrayInputStream in = new ByteArrayInputStream("G\n".getBytes());
     System.setIn(in);
     String command = ui.promptCommand();
@@ -47,14 +47,14 @@ public class TestUI {
   }
 
   @Test(expected=UI.NoCommandException.class)
-  public void TestPromptCommandException() throws IOException, UI.NoCommandException {
+  public void TestPromptCommandException() throws UI.NoCommandException {
     ByteArrayInputStream in = new ByteArrayInputStream("Z\n".getBytes());
     System.setIn(in);
     String command = ui.promptCommand();
   }
 
   @Test
-  public void TestShowGrades() throws IOException {
+  public void TestShowGrades() {
     String expectedOutput = "Gordon成績:\n" +
                             "lab1: 100\n" +
                             "lab2: 100\n" +
@@ -67,7 +67,7 @@ public class TestUI {
   }
 
   @Test
-  public void TestShowFailedGrades() throws IOException {
+  public void TestShowFailedGrades() {
     String expectedOutput = "Frank成績:\n" +
                             "lab1: 0*\n" +
                             "lab2: 0*\n" +
@@ -77,6 +77,24 @@ public class TestUI {
                             "total grade: 0*\n";
     ui.showGrades("102062115");
     assertEquals(expectedOutput, out.toString());
+  }
+
+  @Test
+  public void TestShowRank() {
+    ui.showRank("102062115");
+    assertEquals("Frank排名第2\n", out.toString());
+  }
+
+  @Test
+  public void TestUpdateWeight() {
+    String inputWeight = "20\n20\n20\n20\n20\n";
+    ByteArrayInputStream in = new ByteArrayInputStream(inputWeight.getBytes());
+    System.setIn(in);
+    float[] expectedWeights = { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
+    float[] newWeights = ui.updateWeights();
+    for (int i = 0; i < 5; i++) {
+      assertEquals(expectedWeights[i], newWeights[i], 0.0000001);
+    }
   }
 }
 

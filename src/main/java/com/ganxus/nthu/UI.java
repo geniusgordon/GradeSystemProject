@@ -55,6 +55,7 @@ public class UI {
   }
 
   public void showEndMessage() {
+    System.out.println("Bye~");
   }
 
   public String getGradeString(int grade) {
@@ -74,9 +75,38 @@ public class UI {
   }
 
   public void showRank(String id) {
+    Grades s = system.getGradeById(id);
+    int rank = system.getRank(id);
+    System.out.println(String.format("%s排名第%d", s.getName(), rank));
   }
 
-  public void updateWeights() {
+  public void showWeights(float[] weight) {
+    System.out.print("lab1: " + (weight[0]*100) + "%");
+    System.out.print("lab2: " + (weight[1]*100) + "%");
+    System.out.print("lab3: " + (weight[2]*100) + "%");
+    System.out.print("mid-term: " + (weight[3]*100) + "%");
+    System.out.print("final exam: " + (weight[4]*100) + "%");
+  }
+
+  public float[] updateWeights() {
+    float[] newWeights = new float[5];
+    float total = 0f;
+    Scanner sc = new Scanner(System.in);
+    System.out.print("lab1: ");
+    newWeights[0] = sc.nextFloat();
+    System.out.print("lab2: ");
+    newWeights[1] = sc.nextFloat();
+    System.out.print("lab3: ");
+    newWeights[2] = sc.nextFloat();
+    System.out.print("mid-term: ");
+    newWeights[3] = sc.nextFloat();
+    System.out.print("final exam: ");
+    newWeights[4] = sc.nextFloat();
+    for (float w: newWeights)
+      total += w;
+    for (int i = 0; i < newWeights.length; i++)
+      newWeights[i] /= total;
+    return newWeights;
   }
 
   public static class NoCommandException extends Exception {
