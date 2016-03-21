@@ -47,5 +47,27 @@ public class TestGradeSystems {
     int rank = system.getRank("102062115");
     assertEquals(2, rank);
   }
+
+  @Test
+  public void testUpdateWeight() throws IOException {
+    GradeSystems system = new GradeSystems(testInput);
+    float[] newWeights = { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
+    system.updateWeights(newWeights);
+    assertEquals(newWeights, system.getWeights());
+  }
+
+  @Test(expected=IllegalArgumentException.class)
+  public void testUpdateWeightTotal() throws IOException {
+    GradeSystems system = new GradeSystems(testInput);
+    float[] newWeights = { 0.1f, 0.2f, 0.2f, 0.2f, 0.2f };
+    system.updateWeights(newWeights);
+  }
+
+  @Test(expected=IllegalArgumentException.class)
+  public void testUpdateWeightArrayLength() throws IOException {
+    GradeSystems system = new GradeSystems(testInput);
+    float[] newWeights = { 0.4f, 0.2f, 0.2f, 0.2f };
+    system.updateWeights(newWeights);
+  }
 }
 

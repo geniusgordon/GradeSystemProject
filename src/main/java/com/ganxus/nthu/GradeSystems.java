@@ -57,6 +57,10 @@ public class GradeSystems {
     students = readGrades(filename);
   }
 
+  public float[] getWeights() {
+    return weights;
+  }
+
   /**
    * This method gets the student's grade by his id
    * Time estimate: O(n)
@@ -100,7 +104,18 @@ public class GradeSystems {
    *
    * @param weights new weights.
    */
-  public void updateWeights(float[] weights) {
+  public void updateWeights(float[] weights) throws IllegalArgumentException {
+    if (weights.length != 5)
+      throw new IllegalArgumentException();
+
+    float total = 0f;
+    for (float w: weights) {
+      total += w;
+    }
+    float e = (total > 1.0f) ? total - 1.0f : 1.0f - total;
+    if (e > 0.0000001f)
+      throw new IllegalArgumentException();
+    this.weights = weights;
   }
 }
 
