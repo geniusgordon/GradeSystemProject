@@ -47,7 +47,8 @@ public class Grades {
   }
 
   @Override
-  public boolean equals(Grade grade) {
+  public boolean equals(Object obj) {
+    Grades grade = (Grades) obj;
     if (!this.id.equals(grade.id))
       return false;
     if (!this.name.equals(grade.name))

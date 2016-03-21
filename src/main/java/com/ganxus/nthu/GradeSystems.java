@@ -5,15 +5,29 @@ import java.util.*;
  * A class for a list of student grades
  */
 public class GradeSystems {
-  private float[] weights;
+  private float[] weights = { 0.1f, 0.1f, 0.1f, 0.3f, 0.4f };
   private List<Grades> students;
 
   static public List<Grades> readGrades(String filename) {
-    return new List<Grades>();
+    return new LinkedList<Grades>();
   }
 
-  static public Grade parseLine(String line) {
-    return null;
+  /**
+   * This function parse a line into a Grade object.
+   * 
+   * @param line A string represents the students grades.
+   * @return a Grade object.
+   */
+  static public Grades parseLine(String line) {
+    String[] s = line.split(" ");
+    int[] grades = {
+      Integer.parseInt(s[2]),
+      Integer.parseInt(s[3]),
+      Integer.parseInt(s[4]),
+      Integer.parseInt(s[5]),
+      Integer.parseInt(s[6]),
+    };
+    return new Grades(s[1], s[0], grades);
   }
 
   /**
@@ -21,7 +35,6 @@ public class GradeSystems {
    *
    */
   public GradeSystems() {
-    weight = { 0.1f, 0.1f, 0.1, 0.3f, 0.4f };
     students = readGrades("gradeInput.txt");
   }
 
@@ -33,7 +46,7 @@ public class GradeSystems {
    * @return Student's grade.
    *
    */
-  public Grade getGradeById(String id) {
+  public Grades getGradeById(String id) {
     return null;
   }
 
