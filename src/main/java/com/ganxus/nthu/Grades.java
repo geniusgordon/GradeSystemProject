@@ -45,5 +45,18 @@ public class Grades {
     }
     return (int)Math.floor(total + 0.5f);
   }
+
+  @Override
+  public boolean equals(Grade grade) {
+    if (!this.id.equals(grade.id))
+      return false;
+    if (!this.name.equals(grade.name))
+      return false;
+    for (int i = 0; i < 5; i++) {
+      if (this.grades[i] != grade.grades[i])
+        return false;
+    }
+    return true;
+  }
 }
 
