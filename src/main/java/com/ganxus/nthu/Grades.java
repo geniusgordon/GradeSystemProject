@@ -27,6 +27,18 @@ public class Grades {
     this.grades = grades;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public int[] getGrades() {
+    return grades;
+  }
+
   /**
    * This method calculates total grade
    * Time estimate: O(n)
@@ -44,6 +56,20 @@ public class Grades {
       total += grades[i] * weights[i];
     }
     return (int)Math.floor(total + 0.5f);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    Grades grade = (Grades) obj;
+    if (!this.id.equals(grade.id))
+      return false;
+    if (!this.name.equals(grade.name))
+      return false;
+    for (int i = 0; i < 5; i++) {
+      if (this.grades[i] != grade.grades[i])
+        return false;
+    }
+    return true;
   }
 }
 
