@@ -28,6 +28,9 @@ public class UI {
     system = new GradeSystems(filename);
   }
 
+  /**
+   * This is the main function of UI.
+   */
   public void run() {
     Scanner sc = new Scanner(System.in);
     while(true) {
@@ -76,12 +79,22 @@ public class UI {
     }
   }
 
+  /**
+   * This method prompts the user for student ID or quit.
+   *
+   * @return the ID user inputs
+   */
   public String promptId() {
     System.out.print("輸入ID或 Q (結束使用)? ");
     Scanner sc = new Scanner(System.in);
     return sc.next();
   }
 
+  /**
+   * This method prompts the user for a command.
+   *
+   * @return the command user inputs
+   */
   public String promptCommand() throws NoCommandException {
     System.out.println("G 顯示成績 (Grade)");
     System.out.println("R 顯示排名 (Rank)");
@@ -95,19 +108,40 @@ public class UI {
     return command;
   }
 
+  /**
+   * This method prints Welcome NAME on the console
+   * 
+   * @param id the student's id
+   *
+   */
   public void showWelcomeMessage(String id) {
     Grades s = system.getGradeById(id);
     System.out.println("Welcome " + s.getName());
   }
 
+  /**
+   * This method prints Bye~ on the console
+   */
   public void showEndMessage() {
     System.out.println("Bye~");
   }
 
+  /**
+   * This method returns the string of the grade
+   * and adds * at the end if grade is below 60.
+   *
+   * @param grade grade
+   * @return the string of the grade.
+   */
   public String getGradeString(int grade) {
     return grade >= 60 ? String.valueOf(grade) : String.valueOf(grade) + "*";
   }
 
+  /**
+   * This method prints the grades of the student.
+   *
+   * @param id the student's id
+   */
   public void showGrades(String id) {
     Grades s = system.getGradeById(id);
     int[] grades = s.getGrades();
@@ -120,12 +154,20 @@ public class UI {
     System.out.println("total grade: " + getGradeString(s.calculateTotalGrade(system.getWeights())));
   }
 
+  /**
+   * This method prints the rank of the student.
+   *
+   * @param id the student's id
+   */
   public void showRank(String id) {
     Grades s = system.getGradeById(id);
     int rank = system.getRank(id);
     System.out.println(String.format("%s排名第%d", s.getName(), rank));
   }
 
+  /**
+   * This method prints the weights with %.
+   */
   public void showWeights(float[] weight) {
     System.out.println("lab1: " + (weight[0]*100) + "%");
     System.out.println("lab2: " + (weight[1]*100) + "%");
@@ -134,6 +176,11 @@ public class UI {
     System.out.println("final exam: " + (weight[4]*100) + "%");
   }
 
+  /**
+   * This method prompts the user to enter new weights.
+   *
+   * @return new weights
+   */
   public float[] updateWeights() {
     float[] newWeights = new float[5];
     float total = 0f;

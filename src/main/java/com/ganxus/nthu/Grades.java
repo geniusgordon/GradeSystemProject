@@ -58,6 +58,14 @@ public class Grades {
     return (int)Math.floor(total + 0.5f);
   }
 
+  /**
+   * This method ovverides Object.equals
+   * Time estimate: O(n)
+   *
+   * @param weights Weights for different grades.
+   * @return Total grade for this student.
+   *
+   */
   @Override
   public boolean equals(Object obj) {
     Grades grade = (Grades) obj;
