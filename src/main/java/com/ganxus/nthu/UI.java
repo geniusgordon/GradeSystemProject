@@ -127,11 +127,11 @@ public class UI {
   }
 
   public void showWeights(float[] weight) {
-    System.out.print("lab1: " + (weight[0]*100) + "%");
-    System.out.print("lab2: " + (weight[1]*100) + "%");
-    System.out.print("lab3: " + (weight[2]*100) + "%");
-    System.out.print("mid-term: " + (weight[3]*100) + "%");
-    System.out.print("final exam: " + (weight[4]*100) + "%");
+    System.out.println("lab1: " + (weight[0]*100) + "%");
+    System.out.println("lab2: " + (weight[1]*100) + "%");
+    System.out.println("lab3: " + (weight[2]*100) + "%");
+    System.out.println("mid-term: " + (weight[3]*100) + "%");
+    System.out.println("final exam: " + (weight[4]*100) + "%");
   }
 
   public float[] updateWeights() {
