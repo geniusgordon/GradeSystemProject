@@ -7,7 +7,6 @@ import java.util.*;
  */
 public class UI {
   private List<String> commands;
-  private String id;
   private GradeSystems system;
 
   /**
@@ -32,19 +31,7 @@ public class UI {
    * This is the main function of UI.
    */
   public void run() {
-    Scanner sc = new Scanner(System.in);
-    while(true) {
-      String i = promptId();
-      if (system.getGradeById(i) != null) {
-        id = i;
-        break;
-      }
-      if (i.equals("Q")) {
-        showEndMessage();
-        return;
-      }
-      System.out.println("沒有這個人");
-    }
+    String id = getStudentId();
     showWelcomeMessage(id);
     while(true) {
       try {
@@ -54,21 +41,7 @@ public class UI {
         } else if (command.equals("R")) {
           showRank(id);
         } else if (command.equals("W")) {
-          System.out.println("舊配分");
-          showWeights(system.getWeights());
-          float[] newWeights = updateWeights();
-          System.out.println("請確認新配分");
-          showWeights(newWeights);
-          String confirm = sc.next();
-          if (confirm.equals("Y")) {
-            try {
-              system.updateWeights(newWeights);
-            } catch(IllegalArgumentException e) {
-              System.out.println("配分沒打好");
-            }
-          } else {
-            System.out.println("配分未更新");
-          }
+          updateWeights();
         } else if (command.equals("E")) {
           showEndMessage();
           return;
@@ -76,6 +49,19 @@ public class UI {
       } catch(NoCommandException e) {
         System.out.println("沒有這個指令");
       }
+    }
+  }
+
+  private String getStudentId() {
+    while(true) {
+      String id = promptId();
+      if (system.getGradeById(id) != null)
+        return id;
+      if (id.equals("Q")) {
+        showEndMessage();
+        return null;
+      }
+      System.out.println("沒有這個人");
     }
   }
 
@@ -146,11 +132,9 @@ public class UI {
     Grades s = system.getGradeById(id);
     int[] grades = s.getGrades();
     System.out.println(s.getName() + "成績:");
-    System.out.println("lab1: " + getGradeString(grades[Grades.LAB1]));
-    System.out.println("lab2: " + getGradeString(grades[Grades.LAB2]));
-    System.out.println("lab3: " + getGradeString(grades[Grades.LAB3]));
-    System.out.println("mid-term: " + getGradeString(grades[Grades.MID]));
-    System.out.println("final exam: " + getGradeString(grades[Grades.FINAL]));
+    for (int i = 0; i < 5; i++) {
+      System.out.println(Grades.GRADES[i] + ": " + getGradeString(grades[i]));
+    }
     System.out.println("total grade: " + getGradeString(s.calculateTotalGrade(system.getWeights())));
   }
 
@@ -169,11 +153,29 @@ public class UI {
    * This method prints the weights with %.
    */
   public void showWeights(float[] weight) {
-    System.out.println("lab1: " + (weight[0]*100) + "%");
-    System.out.println("lab2: " + (weight[1]*100) + "%");
-    System.out.println("lab3: " + (weight[2]*100) + "%");
-    System.out.println("mid-term: " + (weight[3]*100) + "%");
-    System.out.println("final exam: " + (weight[4]*100) + "%");
+    for (int i = 0; i < 5; i++) {
+      System.out.println(Grades.GRADES[i] + ": " + (weight[i]*100) + "%");
+    }
+  }
+
+  public void updateWeights() {
+    System.out.println("舊配分");
+    showWeights(system.getWeights());
+    float[] newWeights = getUpdateWeights();
+    System.out.println("請確認新配分");
+    showWeights(newWeights);
+    if (confirm()) {
+      system.updateWeights(newWeights);
+    } else {
+      System.out.println("配分未更新");
+    }
+  }
+
+  private boolean confirm() {
+    System.out.print("(Y/N)");
+    Scanner sc = new Scanner(System.in);
+    String confirm = sc.next();
+    return confirm.equals("Y");
   }
 
   /**
@@ -181,25 +183,21 @@ public class UI {
    *
    * @return new weights
    */
-  public float[] updateWeights() {
+  public float[] getUpdateWeights() {
     float[] newWeights = new float[5];
     float total = 0f;
     Scanner sc = new Scanner(System.in);
-    System.out.print("lab1: ");
-    newWeights[0] = sc.nextFloat();
-    System.out.print("lab2: ");
-    newWeights[1] = sc.nextFloat();
-    System.out.print("lab3: ");
-    newWeights[2] = sc.nextFloat();
-    System.out.print("mid-term: ");
-    newWeights[3] = sc.nextFloat();
-    System.out.print("final exam: ");
-    newWeights[4] = sc.nextFloat();
-    for (float w: newWeights)
-      total += w;
-    for (int i = 0; i < newWeights.length; i++)
-      newWeights[i] /= total;
+    for (int i = 0; i < 5; i++) {
+      newWeights[i] = promptWeight(sc, Grades.GRADES[i]);
+    }
+    for (float w: newWeights) total += w;
+    for (int i = 0; i < newWeights.length; i++) newWeights[i] /= total;
     return newWeights;
+  }
+
+  private float promptWeight(Scanner sc, String name) {
+    System.out.print(name + ": ");
+    return sc.nextFloat();
   }
 
   public static class NoCommandException extends Exception {

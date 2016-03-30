@@ -91,7 +91,7 @@ public class TestUI {
     ByteArrayInputStream in = new ByteArrayInputStream(inputWeight.getBytes());
     System.setIn(in);
     float[] expectedWeights = { 0.2f, 0.2f, 0.2f, 0.2f, 0.2f };
-    float[] newWeights = ui.updateWeights();
+    float[] newWeights = ui.getUpdateWeights();
     for (int i = 0; i < 5; i++) {
       assertEquals(expectedWeights[i], newWeights[i], 0.0000001);
     }

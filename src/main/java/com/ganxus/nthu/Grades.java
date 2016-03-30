@@ -9,6 +9,7 @@ public class Grades {
   static int LAB3 = 2;
   static int MID = 3;
   static int FINAL = 4;
+  static String[] GRADES = {"lab1", "lab2", "lab3", "mid-term", "final exam"};
 
   private String name;
   private String id;
@@ -64,7 +65,6 @@ public class Grades {
    *
    * @param weights Weights for different grades.
    * @return Total grade for this student.
-   *
    */
   @Override
   public boolean equals(Object obj) {
