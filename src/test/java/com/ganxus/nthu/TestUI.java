@@ -23,7 +23,10 @@ public class TestUI {
     System.setIn(System.in);
     System.setOut(System.out);
   }
-
+  /**
+   * Test the standard input.
+   *
+   */
   @Test
   public void TestPromptId() throws IOException {
     ByteArrayInputStream in = new ByteArrayInputStream("102062312\n".getBytes());
@@ -31,6 +34,9 @@ public class TestUI {
     String id = ui.promptId();
     assertEquals(id, "102062312");
   }
+  /**
+   * Test the the output of welcome message. 
+   */
 
   @Test
   public void TestWelcomeMessage() {
@@ -38,6 +44,10 @@ public class TestUI {
     assertEquals("Welcome Gordon\n", out.toString());
   }
 
+  /**
+   * Test the standard input of command.
+   *
+   */
   @Test
   public void TestPromptCommand() throws UI.NoCommandException {
     ByteArrayInputStream in = new ByteArrayInputStream("G\n".getBytes());
@@ -45,14 +55,22 @@ public class TestUI {
     String command = ui.promptCommand();
     assertEquals("G", command);
   }
-
+  
+  /**
+   * Test the invalid command. 
+   *
+   */
   @Test(expected=UI.NoCommandException.class)
   public void TestPromptCommandException() throws UI.NoCommandException {
     ByteArrayInputStream in = new ByteArrayInputStream("Z\n".getBytes());
     System.setIn(in);
     String command = ui.promptCommand();
   }
-
+  
+  /**
+   * Test the output of function "showGrades". 
+   *
+   */
   @Test
   public void TestShowGrades() {
     String expectedOutput = "Gordon成績:\n" +
@@ -66,6 +84,10 @@ public class TestUI {
     assertEquals(expectedOutput, out.toString());
   }
 
+  /**
+   * Test the output of function "showGrades" when encounter failed grade. 
+   *
+   */
   @Test
   public void TestShowFailedGrades() {
     String expectedOutput = "Frank成績:\n" +
@@ -79,12 +101,20 @@ public class TestUI {
     assertEquals(expectedOutput, out.toString());
   }
 
+  /**
+   * Test the output of function "showGrades" when encounter failed grade. 
+   *
+   */
   @Test
   public void TestShowRank() {
     ui.showRank("102062115");
     assertEquals("Frank排名第2\n", out.toString());
   }
-
+  
+  /**
+   * Test the function "update weight". 
+   *
+   */
   @Test
   public void TestUpdateWeight() {
     String inputWeight = "20\n20\n20\n20\n20\n";

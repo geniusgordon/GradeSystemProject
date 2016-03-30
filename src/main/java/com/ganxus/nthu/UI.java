@@ -32,26 +32,50 @@ public class UI {
    */
   public void run() {
     String id = getStudentId();
+    if (id == null) {
+        return;
+    }
     showWelcomeMessage(id);
     while(true) {
       try {
         String command = promptCommand();
-        if (command.equals("G")) {
-          showGrades(id);
-        } else if (command.equals("R")) {
-          showRank(id);
-        } else if (command.equals("W")) {
-          updateWeights();
-        } else if (command.equals("E")) {
-          showEndMessage();
-          return;
-        } 
+        if (!executeCommand(command,id)) {
+            return;
+        }   
       } catch(NoCommandException e) {
         System.out.println("沒有這個指令");
       }
     }
   }
+  /**
+   * This function is used to determine 
+   * which function should execute from user's input 
+   *
+   * @param command user's input 
+   */
 
+  private boolean executeCommand(String command, String id){
+      if (command.equals("G")) {
+          showGrades(id);
+          return true;
+      } else if (command.equals("R")) {
+          showRank(id);
+          return true;
+      } else if (command.equals("W")) {
+          updateWeights();
+          return true;
+      } else if (command.equals("E")) {
+          showEndMessage();
+          return false;
+      }
+        else {
+          return true;
+      } 
+  }
+  /**
+  * This function get user's input id,
+  * check if exist in system.
+  */
   private String getStudentId() {
     while(true) {
       String id = promptId();

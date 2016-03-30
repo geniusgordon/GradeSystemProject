@@ -8,6 +8,10 @@ import com.ganxus.nthu.GradeSystems;
 public class TestGradeSystems {
   static String testInput = "src/test/java/com/ganxus/nthu/testInput.txt";
 
+  /**
+   * This test to test the correctness of parsing string from input file.
+   *
+   */
   @Test
   public void testParseLine() {
     String line = "102062312 Gordon 100 100 100 100 100";
@@ -17,6 +21,10 @@ public class TestGradeSystems {
     assertEquals(expectedGrade, testGrade);
   }
 
+  /**
+   * Test the correctness of reading string from text input.
+   *
+   */
   @Test
   public void testReadGrades() throws IOException {
     int grades1[] = { 100, 100, 100, 100, 100 };
@@ -31,6 +39,10 @@ public class TestGradeSystems {
     assertEquals(expectedGrade.get(1), testGrade.get(1));
   }
 
+  /**
+   * Test the return object of given student's id 
+   *
+   */
   @Test
   public void testGetGradeById() throws IOException {
     GradeSystems system = new GradeSystems(testInput);
@@ -41,6 +53,10 @@ public class TestGradeSystems {
     assertEquals(expectedGrade, testGrade);
   }
 
+  /**
+   * Test the rank returned by function is correct.
+   *
+   */
   @Test
   public void testGetRank() throws IOException {
     GradeSystems system = new GradeSystems(testInput);
@@ -48,6 +64,10 @@ public class TestGradeSystems {
     assertEquals(2, rank);
   }
 
+  /**
+   * Test user's input of updating weight.
+   *
+   */
   @Test
   public void testUpdateWeight() throws IOException {
     GradeSystems system = new GradeSystems(testInput);
@@ -56,6 +76,10 @@ public class TestGradeSystems {
     assertEquals(newWeights, system.getWeights());
   }
 
+  /**
+   * Test user input's sum is not equal to 1.
+   *
+   */
   @Test(expected=IllegalArgumentException.class)
   public void testUpdateWeightTotal() throws IOException {
     GradeSystems system = new GradeSystems(testInput);
@@ -63,6 +87,10 @@ public class TestGradeSystems {
     system.updateWeights(newWeights);
   }
 
+  /**
+   * Test if user doesn't give enough input.
+   *
+   */
   @Test(expected=IllegalArgumentException.class)
   public void testUpdateWeightArrayLength() throws IOException {
     GradeSystems system = new GradeSystems(testInput);
