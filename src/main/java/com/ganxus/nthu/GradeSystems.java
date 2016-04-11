@@ -78,6 +78,23 @@ public class GradeSystems {
     }
     return null;
   }
+  /**
+   * This method returns the student's rank.
+   *
+   * @param id Student's id.
+   * @return Student's average.
+   */
+ 
+  public float getAverage(String id) {
+    Grades s = getGradeById(id);
+    int total = 0;
+    int [] grades = s.getGrades();
+    for( int i = 0; i < grades.length ; i++){
+        total += grades[i];
+    }
+    return total / grades.length; 
+  }
+
 
   /**
    * This method returns the student's rank.

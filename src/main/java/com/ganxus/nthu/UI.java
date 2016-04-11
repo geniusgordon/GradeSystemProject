@@ -13,7 +13,7 @@ public class UI {
    * Class constructor
    */
   public UI() throws IOException {
-    commands = Arrays.asList(new String[]{"G", "R", "W", "E"});
+    commands = Arrays.asList(new String[]{"G", "R","A", "W", "E"});
     system = new GradeSystems();
   }
 
@@ -63,6 +63,9 @@ public class UI {
           return true;
       } else if (command.equals("W")) {
           updateWeights();
+          return true;
+      } else if (command.equals("A")) {
+          showAverageGrade(id);
           return true;
       } else if (command.equals("E")) {
           showEndMessage();
@@ -134,6 +137,15 @@ public class UI {
    */
   public void showEndMessage() {
     System.out.println("Bye~");
+  }
+
+  /**
+   * Show Average Grade 
+   */
+  public void showAverageGrade(String id) {
+    Grades s = system.getGradeById(id);
+    float average = system.getAverage(id);
+    System.out.println(s.getName() + "平均成績: " + String.valueOf(average));
   }
 
   /**
