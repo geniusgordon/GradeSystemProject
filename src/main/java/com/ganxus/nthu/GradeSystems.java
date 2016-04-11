@@ -3,6 +3,8 @@ import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * A class for a list of student grades
@@ -19,11 +21,13 @@ public class GradeSystems {
    */
   static public List<Grades> readGrades(String filename) throws IOException {
     List<Grades> grades = new LinkedList<Grades>();
-		BufferedReader br = new BufferedReader(new FileReader(filename));
-		String line = null;
-		while((line = br.readLine()) != null) {
+    InputStream in = GradeSystems.class.getResourceAsStream(filename);
+    InputStreamReader inr = new InputStreamReader(in);
+    BufferedReader br = new BufferedReader(inr);
+    String line = null;
+    while((line = br.readLine()) != null) {
       grades.add(parseLine(line));
-		}
+    }
     return grades;
   }
 
@@ -36,20 +40,21 @@ public class GradeSystems {
   static public Grades parseLine(String line) {
     String[] s = line.split(" ");
     int[] grades = {
-      Integer.parseInt(s[2]),
-      Integer.parseInt(s[3]),
-      Integer.parseInt(s[4]),
-      Integer.parseInt(s[5]),
-      Integer.parseInt(s[6]),
+      Integer.parseInt(s[s.length-5]),
+      Integer.parseInt(s[s.length-4]),
+      Integer.parseInt(s[s.length-3]),
+      Integer.parseInt(s[s.length-2]),
+      Integer.parseInt(s[s.length-1]),
     };
-    return new Grades(s[1], s[0], grades);
+    String name = s.length == 7 ? s[1] : s[1] +" " + s[2];
+    return new Grades(name, s[0], grades);
   }
 
   /**
    * Class constructor
    */
   public GradeSystems() throws IOException {
-    students = readGrades("com/ganxus/nthu/gradeInput.txt");
+    students = readGrades("gradeInput.txt");
   }
 
   /**

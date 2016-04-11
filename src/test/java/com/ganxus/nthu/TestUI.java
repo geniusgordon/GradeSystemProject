@@ -1,3 +1,5 @@
+package com.ganxus.nthu;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before;
@@ -7,7 +9,7 @@ import com.ganxus.nthu.UI;
 import com.ganxus.nthu.GradeSystems;
 
 public class TestUI {
-  static String testInput = "src/test/java/com/ganxus/nthu/testInput.txt";
+  static String testInput = "testInput.txt";
   UI ui;
   ByteArrayOutputStream out;
 

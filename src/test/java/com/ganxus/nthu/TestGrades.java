@@ -1,3 +1,5 @@
+package com.ganxus.nthu;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import com.ganxus.nthu.Grades;

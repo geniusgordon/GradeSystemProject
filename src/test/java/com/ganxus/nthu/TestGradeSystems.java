@@ -1,3 +1,5 @@
+package com.ganxus.nthu;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.util.*;
@@ -6,7 +8,7 @@ import com.ganxus.nthu.Grades;
 import com.ganxus.nthu.GradeSystems;
 
 public class TestGradeSystems {
-  static String testInput = "src/test/java/com/ganxus/nthu/testInput.txt";
+  static String testInput = "testInput.txt";
 
   /**
    * This test to test the correctness of parsing string from input file.
