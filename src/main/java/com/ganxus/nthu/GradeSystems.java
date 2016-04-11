@@ -79,7 +79,7 @@ public class GradeSystems {
     return null;
   }
   /**
-   * This method returns the student's rank.
+   * This method returns the student's average.
    *
    * @param id Student's id.
    * @return Student's average.
