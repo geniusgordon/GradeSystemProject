@@ -39,7 +39,6 @@ public class Grades {
   public int[] getGrades() {
     return grades;
   }
-
   /**
    * This method calculates total grade
    * Time estimate: O(n)
