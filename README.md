@@ -4,3 +4,15 @@
 
 NTHU 2016 spring Software Engineering HW1
 
+# Build
+
+`mvn compile`
+
+# Test
+
+`mvn test`
+
+# Run
+
+`mvn exec:java -Dexec.mainClass="com.ganxus.nthu.App"`
+
