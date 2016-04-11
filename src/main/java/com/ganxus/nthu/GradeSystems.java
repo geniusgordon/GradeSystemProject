@@ -21,7 +21,7 @@ public class GradeSystems {
    */
   static public List<Grades> readGrades(String filename) throws IOException {
     List<Grades> grades = new LinkedList<Grades>();
-    InputStream in = GradeSystems.class.getResourceAsStream(filename);
+    InputStream in = GradeSystems.class.getClassLoader().getResourceAsStream(filename);
     InputStreamReader inr = new InputStreamReader(in);
     BufferedReader br = new BufferedReader(inr);
     String line = null;
